@@ -2,5 +2,31 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.epam.nbc</groupId>
   <artifactId>test-task</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>ui-framework</module>
+        <module>ui-tests</module>
+        <module>ui-test-harness</module>
+        <module>api-tests</module>
+    </modules>
+    <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+	  <groupId>io.rest-assured</groupId>
+	  <artifactId>rest-assured</artifactId>
+	  <version>4.1.2</version>
+	  <scope>test</scope>
+	</dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>3.141.59</version>
+    </dependency>
+  </dependencies>
 </project>
