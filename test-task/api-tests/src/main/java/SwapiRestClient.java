@@ -1,5 +1,3 @@
-import Contracts.Planet;
-import Contracts.Planets;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 

@@ -1,21 +1,20 @@
-import Contracts.Planet;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import javax.xml.ws.WebServiceException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class GetPlanetTest {
     @Test
     public void get_SecondPlanet_ReturnsAlderaan() {
         // arrange
-        final String expectedName = "Alderaan";
-        final String expectedUrl = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withId("2").build();
+        final Planet expectedPlanet = PlanetContractMother.getAlderaan().build();
         // act
         Planet result = SwapiRestClient.instance().getPlanet("2");
         // assert
-        Assert.assertEquals(result.name, expectedName);
-        Assert.assertEquals(result.url, expectedUrl);
+        assertThat(result).isEqualToComparingFieldByField(expectedPlanet);
     }
 
     @DataProvider(name = "id-data-provider")
