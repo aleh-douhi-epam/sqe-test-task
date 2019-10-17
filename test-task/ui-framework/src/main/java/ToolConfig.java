@@ -16,14 +16,13 @@ public class ToolConfig {
     }
 
     private static Properties getProperties() {
+        Properties prop = new Properties();
         try (InputStream input = new FileInputStream("config.properties")) {
-            Properties prop = new Properties();
             prop.load(input);
-            return prop;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return prop;
     }
 
     public static String getBaseUrl() {

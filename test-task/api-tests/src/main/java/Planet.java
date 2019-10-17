@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 class Planet {
-    String name;
-    String rotation_period;
-    String orbital_period;
-    String diameter;
-    String climate;
-    String gravity;
-    String terrain;
-    String surface_water;
-    String population;
-    ArrayList<String> residents;
-    ArrayList<String> films;
-    String created;
-    String edited;
-    String url;
+    public String name;
+    public String rotation_period;
+    public String orbital_period;
+    public String diameter;
+    public String climate;
+    public String gravity;
+    public String terrain;
+    public String surface_water;
+    public String population;
+    public ArrayList<String> residents;
+    public ArrayList<String> films;
+    public String created;
+    public String edited;
+    public String url;
 }

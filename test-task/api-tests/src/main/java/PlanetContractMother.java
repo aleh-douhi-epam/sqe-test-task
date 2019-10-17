@@ -18,8 +18,7 @@ class PlanetContractMother {
 
     private final static String alderaanPlanetUrl = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withId("2").build();
 
-    static PlanetContractBuilder getAlderaan()
-    {
+    static PlanetContractBuilder getAlderaan() {
         return getPlanet()
                 .withName("Alderaan")
                 .withRotationPeriod("24")
@@ -37,8 +36,7 @@ class PlanetContractMother {
                 .withUrl(alderaanPlanetUrl);
     }
 
-    private static PlanetContractBuilder getPlanet()
-    {
+    private static PlanetContractBuilder getPlanet() {
         return new PlanetContractBuilder();
     }
 }

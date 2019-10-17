@@ -18,32 +18,27 @@ public class SwapiUriBuilder {
         }
     }
 
-    SwapiUriBuilder withPath(String path)
-    {
+    SwapiUriBuilder withPath(String path) {
         builder.setPath(appendSegmentToPath(builder.getPath(), path + "/"));
         return this;
     }
 
-    SwapiUriBuilder withId(String id)
-    {
+    SwapiUriBuilder withId(String id) {
         builder.setPath(appendSegmentToPath(builder.getPath(), id + "/"));
         return this;
     }
 
-    SwapiUriBuilder withSearchQuery(String searchQuery)
-    {
+    SwapiUriBuilder withSearchQuery(String searchQuery) {
         builder.addParameter(SEARCH_PARAM, searchQuery);
         return this;
     }
 
-    public SwapiUriBuilder withFormat(String format)
-    {
+    public SwapiUriBuilder withFormat(String format) {
         builder.addParameter(FORMAT_PARAM, format);
         return this;
     }
 
-    SwapiUriBuilder withPageNumber(String pageNumber)
-    {
+    SwapiUriBuilder withPageNumber(String pageNumber) {
         builder.addParameter(PAGE_PARAM, pageNumber);
         return this;
     }

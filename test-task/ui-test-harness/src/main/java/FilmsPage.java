@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -9,14 +10,14 @@ public class FilmsPage extends BasePage implements Page {
     @FindBy(css="h3.title")
     private List<WebElement> moduleTitle;
 
-    @FindBy(css="div.module_header.active")
-    private WebElement filmSelector;
-
     @FindBy(css="div.films-content img")
     private WebElement filmLogo;
 
     @FindBy(css="span.drop-expand")
     private WebElement filmSelectorDropDown;
+
+    @FindBy(css="ul.drop-container")
+    private WebElement filmSelectorContainer;
 
     public FilmsPage(WebDriver driver) {
         super(driver);
@@ -37,12 +38,9 @@ public class FilmsPage extends BasePage implements Page {
     }
 
     public void selectFilmFromSelector(Films film) {
-        waitTillPageLoad();
         waitTillAjaxLoad();
         filmSelectorDropDown.click();
-        waitForElementToAppear(filmSelector);
-        // dirty hack to get film selector dropdown animation done
-        pause(1000);
+        waitForElementHeightIsGreaterThanSpecified(filmSelectorContainer, 260);
         waitForElementToAppear(By.partialLinkText(film.toString())).click();
     }
 

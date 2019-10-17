@@ -4,8 +4,6 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class BasePage {
     private static final int TIMEOUT = 30;
     private static final int POLLING = 100;
@@ -23,16 +21,8 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    protected WebElement waitForElementToAppear(WebElement webElement) {
-        return wait.until(ExpectedConditions.visibilityOf(webElement));
-    }
-
-    protected void waitForElementToDisappear(By locator) {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-    }
-
-    protected void waitForTextToDisappear(By locator, String text) {
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(locator, text)));
+    protected void waitForElementHeightIsGreaterThanSpecified(WebElement webElement, int height) {
+        wait.until((driver) -> webElement.getRect().height > height);
     }
 
     protected boolean waitTillAjaxLoad() {
@@ -68,13 +58,5 @@ public class BasePage {
             // If timeout, then page is not loaded. For all other exceptions, do not catch.
         }
         return false;
-    }
-
-    protected void pause(int milliseconds) {
-        try {
-            TimeUnit.MILLISECONDS.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
