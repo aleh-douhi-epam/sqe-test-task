@@ -9,7 +9,7 @@ public class ToolConfig {
 
     static {
         Properties prop = getProperties();
-        if (null != prop) {
+        if (prop != null) {
             baseUrl = prop.getProperty("ui.baseUrl");
             browser = prop.getProperty("ui.browser");
         }

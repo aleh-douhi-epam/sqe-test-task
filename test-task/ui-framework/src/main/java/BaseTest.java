@@ -6,7 +6,7 @@ public class BaseTest {
 
     @BeforeSuite
     public void beforeSuite() {
-        if (null == driver) {
+        if (driver == null) {
             driver = DriverFactory.getDriver(DriverType.valueOf(ToolConfig.getBrowser()));
             driver.manage().window().maximize();
         }
@@ -14,7 +14,7 @@ public class BaseTest {
 
     @AfterSuite
     public void afterSuite() {
-        if(null != driver) {
+        if(driver != null) {
             driver.close();
             driver.quit();
         }
