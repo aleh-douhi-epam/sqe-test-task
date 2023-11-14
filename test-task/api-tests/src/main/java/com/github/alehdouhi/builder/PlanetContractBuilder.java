@@ -1,7 +1,11 @@
+package com.github.alehdouhi.builder;
+
+import com.github.alehdouhi.model.Planet;
+
 import java.util.ArrayList;
 
-class PlanetContractBuilder {
-    private Planet planet;
+public class PlanetContractBuilder {
+    private final Planet planet;
 
     PlanetContractBuilder() {
         this.planet = new Planet();
@@ -77,7 +81,7 @@ class PlanetContractBuilder {
         return this;
     }
 
-    Planet build() {
+    public Planet build() {
         return this.planet;
     }
 }

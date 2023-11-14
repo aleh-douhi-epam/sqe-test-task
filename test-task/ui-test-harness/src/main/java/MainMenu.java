@@ -3,13 +3,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.lang.reflect.Type;
-
 public class MainMenu extends BasePage {
-    @FindBy(id="nav-sw-logo")
+    @FindBy(id="local-nav-logo-desktop")
     private WebElement starWarsLogo;
 
-    @FindBy(id="section-links")
+    @FindBy(id="local-nav-bar-secondary")
     private WebElement siteNavigationMenu;
 
     MainMenu(WebDriver driver) {
@@ -21,7 +19,7 @@ public class MainMenu extends BasePage {
     }
 
     public Page navigateTo(MainMenuLinks mainMenuLinks) {
-        String link = String.format("a[data-section=%s]", mainMenuLinks.toString().toLowerCase());
+        String link = String.format("a[data-title=%s]", mainMenuLinks);
         siteNavigationMenu.findElement(By.cssSelector(link)).click();
         switch (mainMenuLinks) {
             case FILMS:

@@ -1,6 +1,8 @@
+package com.github.alehdouhi.model;
+
 import java.util.ArrayList;
 
-class Planet {
+public class Planet {
     public String name;
     public String rotation_period;
     public String orbital_period;

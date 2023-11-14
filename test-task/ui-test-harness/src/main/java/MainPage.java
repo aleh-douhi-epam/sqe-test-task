@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class MainPage extends BasePage implements Page {
-    @FindBy(css="h2.module_title")
+    @FindBy(css="div.module_header")
     private List<WebElement> moduleTitle;
 
     public MainPage(WebDriver driver) {
@@ -32,7 +32,8 @@ public class MainPage extends BasePage implements Page {
 
     public enum Section {
         LATEST_NEWS,
-        LATEST_VIDEO;
+        LATEST_VIDEO,
+        EXPLORE_MORE;
 
         @Override
         public String toString() {

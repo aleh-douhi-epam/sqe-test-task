@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SearchPage extends BasePage implements Page {
 
-    @FindBy(css="div.search-view li.video.result")
+    @FindBy(css="section.search-results li.result-item")
     private List<WebElement> searchResult;
 
     SearchPage(WebDriver driver) {

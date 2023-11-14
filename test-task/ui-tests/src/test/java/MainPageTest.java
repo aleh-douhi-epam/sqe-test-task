@@ -3,17 +3,15 @@ import org.testng.annotations.Test;
 
 public class MainPageTest extends BaseTest {
     @Test
-    public void mainPage_Open_LogoIsShown() {
-        // arrange
-        MainPage mainPage = new MainPage(getDriver());
+    public void mainPage_open_logoIsShown() {
         // act
-        mainPage.open();
+        MainPage mainPage = new MainPage(getDriver());
         // assert
         Assert.assertTrue(mainPage.mainMenu().isLogoShown());
     }
 
     @Test
-    public void mainPage_NavigateToFilms_FilmsPageIsShown() {
+    public void mainPage_navigateToFilms_filmsPageIsShown() {
         // arrange
         MainPage mainPage = new MainPage(getDriver());
         mainPage.open();
@@ -24,7 +22,7 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void mainPage_NavigateToVideo_VideoPageIsShown() {
+    public void mainPage_navigateToVideo_videoPageIsShown() {
         // arrange
         MainPage mainPage = new MainPage(getDriver());
         mainPage.open();
@@ -35,14 +33,15 @@ public class MainPageTest extends BaseTest {
     }
 
     @Test
-    public void mainPage_OpenPage_SectionsAreShown() {
+    public void mainPage_openPage_sectionsAreShown() {
         // arrange
         MainPage mainPage = new MainPage(getDriver());
         // act
         mainPage.open();
         // assert
-        Assert.assertEquals(mainPage.getSectionsCount(), 2);
+        Assert.assertEquals(mainPage.getSectionsCount(), 4);
         Assert.assertTrue(mainPage.isSectionShown(MainPage.Section.LATEST_NEWS));
         Assert.assertTrue(mainPage.isSectionShown(MainPage.Section.LATEST_VIDEO));
+        Assert.assertTrue(mainPage.isSectionShown(MainPage.Section.EXPLORE_MORE));
     }
 }

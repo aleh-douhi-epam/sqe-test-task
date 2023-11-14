@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class FilmsPageTest extends BaseTest {
     @Test
-    public void filmsPage_OpenPage_SectionsAreShown() {
+    public void filmsPage_openPage_sectionsAreShown() {
         // arrange
         FilmsPage filmsPage = new FilmsPage(getDriver());
         // act
@@ -13,13 +13,13 @@ public class FilmsPageTest extends BaseTest {
     }
 
     @Test
-    public void filmsPage_SelectFilm_FilmPageIsShown() {
+    public void filmsPage_selectFilm_filmPageIsShown() {
         // arrange
         FilmsPage filmsPage = new FilmsPage(getDriver());
         filmsPage.open();
         // act
-        filmsPage.selectFilmFromSelector(FilmsPage.Films.THE_PHANTOM_MENACE);
+        filmsPage.selectFilmFromPage(FilmsPage.Films.THE_PHANTOM_MENACE);
         // assert
-        Assert.assertTrue(filmsPage.isFilmLogoShown(FilmsPage.Films.THE_PHANTOM_MENACE));
+        Assert.assertTrue(filmsPage.isFilmPosterShown(FilmsPage.Films.THE_PHANTOM_MENACE));
     }
 }

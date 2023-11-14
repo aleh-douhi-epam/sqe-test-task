@@ -1,20 +1,23 @@
+package com.github.alehdouhi;
+
+import com.github.alehdouhi.builder.PlanetContractMother;
+import com.github.alehdouhi.model.Planet;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import javax.xml.ws.WebServiceException;
-
+import jakarta.xml.ws.WebServiceException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GetPlanetTest {
     @Test
-    public void get_SecondPlanet_ReturnsAlderaan() {
+    public void get_secondPlanet_returnsAlderaan() {
         // arrange
         final Planet expectedPlanet = PlanetContractMother.getAlderaan().build();
         // act
         Planet result = SwapiRestClient.instance().getPlanet("2");
         // assert
-        assertThat(result).isEqualToComparingFieldByField(expectedPlanet);
+        assertThat(result).usingRecursiveComparison()
+                .isEqualTo(expectedPlanet);
     }
 
     @DataProvider(name = "id-data-provider")
@@ -23,7 +26,7 @@ public class GetPlanetTest {
     }
 
     @Test(dataProvider = "id-data-provider")
-    public void get_NotExistingPlanet_ReturnsNotFound(String id) {
+    public void get_notExistingPlanet_returnsNotFound(String id) {
         // arrange
         final String expectedStatusCode = "404";
         // act

@@ -1,20 +1,23 @@
+package com.github.alehdouhi;
+
+import com.github.alehdouhi.builder.SwapiUriBuilder;
+import com.github.alehdouhi.model.Planets;
+import jakarta.xml.ws.WebServiceException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import javax.xml.ws.WebServiceException;
-
 public class GetPlanetsTest {
-    final private String expectedCountOfAllPlanets = "61";
 
     @Test
-    public void get_AllPlanets_ReturnsTenPlanets() {
+    public void get_allPlanets_returnsTenPlanets() {
         // arrange
         final int expectedCountPerPage = 10;
         final String expectedNextPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("2").build();
         // act
         Planets result = SwapiRestClient.instance().getPlanets();
         // assert
+        String expectedCountOfAllPlanets = "60";
         Assert.assertEquals(result.count, expectedCountOfAllPlanets);
         Assert.assertEquals(result.results.size(), expectedCountPerPage);
         Assert.assertEquals(result.next, expectedNextPage);
@@ -22,7 +25,7 @@ public class GetPlanetsTest {
     }
 
     @Test
-    public void get_PlanetsFromSecondPage_ReturnsSiblingPages() {
+    public void get_planetsFromSecondPage_returnsSiblingPages() {
         // arrange
         final int expectedCountPerPage = 10;
         final String expectedNextPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("3").build();
@@ -36,12 +39,12 @@ public class GetPlanetsTest {
     }
 
     @Test
-    public void get_PlanetsFromLastPage_ReturnsSiblingPages() {
+    public void get_planetsFromLastPage_returnsSiblingPages() {
         // arrange
-        final int expectedCountPerPage = 1;
-        final String expectedPreviousPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("6").build();
+        final int expectedCountPerPage = 10;
+        final String expectedPreviousPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("5").build();
         // act
-        Planets result = SwapiRestClient.instance().getPlanets("7", null);
+        Planets result = SwapiRestClient.instance().getPlanets("6", null);
         // assert
         Assert.assertNull(result.next);
         Assert.assertEquals(result.previous, expectedPreviousPage);
@@ -54,7 +57,7 @@ public class GetPlanetsTest {
     }
 
     @Test(dataProvider = "search-data-provider")
-    public void get_PlanetsBySearch_ReturnsPlanetsContainingString(String searchQuery, int expectedCountOfPlanets) {
+    public void get_planetsBySearch_returnsPlanetsContainingString(String searchQuery, int expectedCountOfPlanets) {
         // act
         Planets result = SwapiRestClient.instance().getPlanets(null, searchQuery);
         // assert
@@ -71,7 +74,7 @@ public class GetPlanetsTest {
     }
 
     @Test(dataProvider = "page-data-provider")
-    public void get_PlanetsFromNotExistingPage_ReturnsNotFound(String pageNumber, String searchQuery) {
+    public void get_planetsFromNotExistingPage_returnsNotFound(String pageNumber, String searchQuery) {
         // arrange
         final String expectedStatusCode = "404";
         // act
@@ -81,12 +84,12 @@ public class GetPlanetsTest {
     }
 
     @Test
-    public void get_PlanetsFromSecondPageWithSearchQuery_ReturnsPlanetsContainingString() {
+    public void get_planetsFromSecondPageWithSearchQuery_returnsPlanetsContainingString() {
         // arrange
-        final String expectedCountOfAllPlanets = "40";
+        final String expectedCountOfAllPlanets = "39";
         String searchQuery = "a";
-        final String expectedNextPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("3").withSearchQuery("a").build();
-        final String expectedPreviousPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withPageNumber("1").withSearchQuery("a").build();
+        final String expectedNextPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withSearchQuery("a").withPageNumber("3").build();
+        final String expectedPreviousPage = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withSearchQuery("a").withPageNumber("1").build();
         // act
         Planets result = SwapiRestClient.instance().getPlanets("2", searchQuery);
         // assert
@@ -96,5 +99,3 @@ public class GetPlanetsTest {
         Assert.assertTrue(result.results.stream().allMatch((planet) -> planet.name.toLowerCase().contains(searchQuery)));
     }
 }
-
-

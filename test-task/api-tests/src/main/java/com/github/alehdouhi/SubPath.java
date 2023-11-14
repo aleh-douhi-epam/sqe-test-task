@@ -1,3 +1,5 @@
+package com.github.alehdouhi;
+
 public enum SubPath {
     PEOPLE,
     PLANETS,

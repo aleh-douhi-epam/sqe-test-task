@@ -1,7 +1,11 @@
+package com.github.alehdouhi.builder;
+
+import com.github.alehdouhi.SubPath;
+
 import java.util.ArrayList;
 
-class PlanetContractMother {
-    private final static ArrayList<String> alderaanResidents = new ArrayList<String>() {
+public class PlanetContractMother {
+    private final static ArrayList<String> alderaanResidents = new ArrayList<>() {
         {
             add(new SwapiUriBuilder().withPath(SubPath.PEOPLE.toString()).withId("5").build());
             add(new SwapiUriBuilder().withPath(SubPath.PEOPLE.toString()).withId("68").build());
@@ -9,16 +13,16 @@ class PlanetContractMother {
         }
     };
 
-    private final static ArrayList<String> alderaanFilms = new ArrayList<String>() {
+    private final static ArrayList<String> alderaanFilms = new ArrayList<>() {
         {
-            add(new SwapiUriBuilder().withPath(SubPath.FILMS.toString()).withId("6").build());
             add(new SwapiUriBuilder().withPath(SubPath.FILMS.toString()).withId("1").build());
+            add(new SwapiUriBuilder().withPath(SubPath.FILMS.toString()).withId("6").build());
         }
     };
 
     private final static String alderaanPlanetUrl = new SwapiUriBuilder().withPath(SubPath.PLANETS.toString()).withId("2").build();
 
-    static PlanetContractBuilder getAlderaan() {
+    public static PlanetContractBuilder getAlderaan() {
         return getPlanet()
                 .withName("Alderaan")
                 .withRotationPeriod("24")

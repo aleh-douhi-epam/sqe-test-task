@@ -1,7 +1,3 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.EdgeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -15,29 +11,10 @@ import java.util.function.Supplier;
 class DriverFactory {
     private static final Map<DriverType, Supplier<WebDriver>> driverMap = new HashMap<>();
 
-    // chrome driver supplier
-    private static final Supplier<WebDriver> chromeDriverSupplier = () -> {
-        ChromeDriverManager.chromedriver().setup();
-        return new ChromeDriver();
-    };
-
-    // firefox driver supplier
-    private static final Supplier<WebDriver> firefoxDriverSupplier = () -> {
-        FirefoxDriverManager.firefoxdriver().setup();
-        return new FirefoxDriver();
-    };
-
-    // ie driver supplier
-    private static final Supplier<WebDriver> ieDriverSupplier = () -> {
-        InternetExplorerDriverManager.iedriver().setup();
-        return new InternetExplorerDriver();
-    };
-
-    // edge driver supplier
-    private static final Supplier<WebDriver> edgeDriverSupplier = () -> {
-        EdgeDriverManager.edgedriver().setup();
-        return new EdgeDriver();
-    };
+    private static final Supplier<WebDriver> chromeDriverSupplier = ChromeDriver::new;
+    private static final Supplier<WebDriver> firefoxDriverSupplier = FirefoxDriver::new;
+    private static final Supplier<WebDriver> ieDriverSupplier = InternetExplorerDriver::new;
+    private static final Supplier<WebDriver> edgeDriverSupplier = EdgeDriver::new;
 
     //add all the drivers into a map
     static {

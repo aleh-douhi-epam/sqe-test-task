@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -10,10 +9,10 @@ public class FilmsPage extends BasePage implements Page {
     @FindBy(css="h3.title")
     private List<WebElement> moduleTitle;
 
-    @FindBy(css="div.films-content img")
+    @FindBy(css="div.poster img")
     private WebElement filmLogo;
 
-    @FindBy(css="span.drop-expand")
+    @FindBy(css="h3.links-list-title")
     private WebElement filmSelectorDropDown;
 
     @FindBy(css="ul.drop-container")
@@ -25,7 +24,7 @@ public class FilmsPage extends BasePage implements Page {
 
     @Override
     public void open() {
-        driver.get(ToolConfig.getBaseUrl() + "films");
+        driver.get(ToolConfig.getBaseUrl() + MainMenu.MainMenuLinks.FILMS.toString().toLowerCase());
     }
 
     @Override
@@ -37,22 +36,33 @@ public class FilmsPage extends BasePage implements Page {
         return moduleTitle.size();
     }
 
-    public void selectFilmFromSelector(Films film) {
+    public void selectFilmFromDropdown(Films film) {
         waitTillAjaxLoad();
         filmSelectorDropDown.click();
         waitForElementHeightIsGreaterThanSpecified(filmSelectorContainer, 260);
         waitForElementToAppear(By.partialLinkText(film.toString())).click();
     }
 
-    public boolean isFilmLogoShown(Films film) {
+    public void selectFilmFromPage(Films film) {
         waitTillAjaxLoad();
-        return filmLogo.getAttribute("alt").toUpperCase().contains(film.toString());
+        driver.findElement(By.partialLinkText(film.label)).click();
+    }
+
+    public boolean isFilmPosterShown(Films film) {
+        waitTillAjaxLoad();
+        return filmLogo.getAttribute("alt").contains(film.label);
     }
 
     public enum Films {
-        THE_PHANTOM_MENACE,
-        ATTACK_OF_THE_CLONES,
-        REVENGE_OF_THE_SITH;
+        THE_PHANTOM_MENACE("The Phantom Menace"),
+        ATTACK_OF_THE_CLONES("Attack of the Clones"),
+        REVENGE_OF_THE_SITH("Revenge of the Sith");
+
+        public final String label;
+
+        Films(String label) {
+            this.label = label;
+        }
 
         @Override
         public String toString() {

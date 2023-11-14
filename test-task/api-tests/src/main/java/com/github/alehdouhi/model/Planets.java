@@ -1,6 +1,8 @@
+package com.github.alehdouhi.model;
+
 import java.util.List;
 
-class Planets {
+public class Planets {
     public String count;
     public String next;
     public String previous;

@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,10 +8,10 @@ public class VideoPage extends BasePage implements Page {
     @FindBy(css="form.search-form div.query-field>input[name=q]")
     private WebElement searchField;
 
-    @FindBy(className="search-button")
+    @FindBy(css="input[value=Search]")
     private WebElement searchButton;
 
-    @FindBy(css="h2.module_title")
+    @FindBy(css="div.module_header h2")
     private List<WebElement> moduleTitle;
 
     public VideoPage(WebDriver driver) {
@@ -37,7 +36,7 @@ public class VideoPage extends BasePage implements Page {
     }
 
     public boolean isSectionShown(VideoSection videoSection) {
-        return moduleTitle.stream().anyMatch(element -> element.getText().contains(videoSection.toString()));
+        return moduleTitle.stream().anyMatch(element -> element.getText().toUpperCase().contains(videoSection.toString()));
     }
 
     @Override
@@ -46,8 +45,7 @@ public class VideoPage extends BasePage implements Page {
     }
 
     public enum VideoSection {
-        SHOW,
-        STORIES,
+        MORE,
         FEATURED,
         BROWSE
     }
